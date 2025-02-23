@@ -1,0 +1,29 @@
+# Dockerfile.prod - For production environment
+FROM node:20-alpine
+
+# Set the working directory
+WORKDIR /app
+
+# Copy package.json and pnpm-lock.yaml for installation
+COPY package.json ./
+
+# Install pnpm globally
+RUN npm install -g pnpm
+
+# Install dependencies
+RUN pnpm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Remove .env.local
+RUN rm -f .env.local
+
+# Build the Next.js application for production
+RUN pnpm build
+
+# Expose the port Next.js runs on
+EXPOSE 3000
+
+# Start the application in production mode
+CMD ["pnpm", "start"]

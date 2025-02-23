@@ -1,0 +1,14 @@
+# Exclude environment files
+.env
+src/.env
+
+# Exclude version control directories
+.git
+
+# Exclude Python cache files
+__pycache__/
+*.pyc
+*.pyo
+
+# Exclude log files
+*.log
